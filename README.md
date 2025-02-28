@@ -97,15 +97,13 @@ The project includes several test scripts in `package.json`:
 ## Project Structure
 
 ```
-├── e2e/                     # End-to-end test directory
-│   ├── helpers/             # Test helper functions
-│   │   └── auth.ts          # Authentication helpers
-│   ├── smoke/               # Smoke tests
-│   │   └── auth.spec.ts     # Authentication smoke test
-│   └── features/            # Feature tests
-│       └── sample.feature.ts # Sample feature test
-├── playwright.config.ts     # Playwright configuration
-└── package.json             # Project dependencies and scripts
+├── app/                      # Next.js app directory
+├── e2e/                      # End-to-end test directory
+│   ├── features              # Feature tests
+│   │   └── sample.feature.ts # Sample feature test
+│   ├── auth.setup.ts         # Authentication setup, caches sessions
+│   └── smoke.spec.ts         # Verifies signUp, signOut, and signIn
+├── playwright.config.ts      # Playwright config
 ```
 
 ## Test Helpers
