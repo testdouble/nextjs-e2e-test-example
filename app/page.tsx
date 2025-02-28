@@ -6,15 +6,16 @@ export default async function Home() {
   if (!session) {
     return (
       <main>
-        <a href="/auth/login?screen_hint=signup">Sign Up</a>
-        <a href="/auth/login">Log In</a>
+        <a href="/auth/login?screen_hint=signup">Sign up</a>
+        <a href="/auth/login">Log in</a>
       </main>
     );
   }
+
   return (
     <main>
-      <h1>Welcome, {session.user.name}</h1>
-      <a href="/auth/logout">Log Out</a>
+      <h1>Welcome, {session.user.name}!</h1>
+      <a href="/auth/logout">Log out</a>
     </main>
   );
 }

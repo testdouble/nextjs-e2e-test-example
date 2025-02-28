@@ -6,7 +6,13 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:record": "playwright codegen http://localhost:3000",
+    "test:e2e:smoke": "playwright test --project=Smoke",
+    "test:e2e:features": "playwright test --project=Features",
+    "test:e2e:debug": "PWDEBUG=1 playwright test --headed"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^4.0.2",
@@ -15,6 +21,7 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.50.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
