@@ -1,36 +1,156 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Playwright E2E Testing with Auth0 in Next.js
+
+This repository demonstrates how to set up end-to-end testing with Playwright for Next.js applications that use Auth0 authentication.
+
+[![Playwright E2E Testing with Auth0 in Next.js](https://img.youtube.com/vi/xl3PLnENz8g/0.jpg)](https://www.youtube.com/watch?v=xl3PLnENz8g)
+
+## Overview
+
+This project shows how to:
+
+- Configure Playwright for testing auth flows in Next.js applications
+- Create reusable test helpers for common auth operations
+- Debug tests effectively using Playwright's UI Explorer and recorder
+- Structure tests for both smoke testing and feature verification
+- Optimize test performance with session caching
+
+## Features
+
+- **Smoke Tests**: Verify critical auth flows (sign up, sign in, sign out)
+- **Feature Tests**: Test specific routes with authenticated sessions
+- **Test Helpers**: Reusable functions for auth operations
+- **Session Caching**: Improve test performance by reusing authenticated sessions
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Node.js (v20 or later)
+- npm
+- A Next.js application
+- Auth0 account and configuration
+
+### Installation
+
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/testdouble/nextjs-e2e-test-example.git
+   cd nextjs-e2e-test-example
+   ```
+
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+1. Install Playwright:
+   ```bash
+   npx playwright install
+   ```
+
+1. Configure your Auth0 credentials in `.env.local`:
+   ```
+   AUTH0_SECRET='your-auth0-secret'
+   AUTH0_BASE_URL='http://localhost:3000'
+   AUTH0_ISSUER_BASE_URL='https://your-tenant.auth0.com'
+   AUTH0_CLIENT_ID='your-client-id'
+   AUTH0_CLIENT_SECRET='your-client-secret'
+   ```
+
+### Running Tests
+
+The project includes several test scripts in `package.json`:
+
+- **Run headless E2E tests**:
+  ```bash
+  npm run test:e2e
+  ```
+
+- **Run with UI Explorer**:
+  ```bash
+  npm run test:e2e:ui
+  ```
+
+- **Record tests (2 terminal tabs)**:
+  ```bash
+  npm run dev
+  npm run test:e2e:record
+  ```
+
+- **Run smoke tests only**:
+  ```bash
+  npm run test:e2e:smoke
+  ```
+
+- **Run feature tests only**:
+  ```bash
+  npm run test:e2e:features
+  ```
+
+- **Debug tests**:
+  ```bash
+  npm run test:e2e:debug
+  ```
+
+## Project Structure
+
+```
+├── e2e/                     # End-to-end test directory
+│   ├── helpers/             # Test helper functions
+│   │   └── auth.ts          # Authentication helpers
+│   ├── smoke/               # Smoke tests
+│   │   └── auth.spec.ts     # Authentication smoke test
+│   └── features/            # Feature tests
+│       └── sample.feature.ts # Sample feature test
+├── playwright.config.ts     # Playwright configuration
+└── package.json             # Project dependencies and scripts
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Test Helpers
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The project includes helper functions for authentication flows you can customize for your specific needs.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```typescript
+// Example from e2e/helpers/auth.ts
+export const createTestContext = () => {
+  const timestamp = Date.now();
+  return {
+    email: `${timestamp}+testuser@example.com`,
+    password: 'S0me-R@ndom-P@ssword!'
+  };
+};
 
-## Learn More
+export const signUp = async (page, testContext) => {
+  // Implementation for sign up flow
+};
 
-To learn more about Next.js, take a look at the following resources:
+export const signIn = async (page, testContext) => {
+  // Implementation for sign in flow
+};
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+export const signOut = async (page) => {
+  // Implementation for sign out flow
+};
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Configuration
 
-## Deploy on Vercel
+The Playwright configuration (`playwright.config.ts`) includes multiple projects:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **smoke**: For quick verification of auth flows
+- **features**: For testing specific routes/features in your application with authenticated sessions
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Each project can have different browser configurations, dependencies, and test patterns.
+
+## Best Practices
+
+- Keep E2E tests focused on critical paths
+- Use the recorder for complex interactions
+- Cache sessions when possible to speed up tests
+- Use role-based selectors for better accessibility testing
+- Run smoke tests in CI for every change
+- Run feature tests less frequently
+
+## License
+
+[MIT](LICENSE)
