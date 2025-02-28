@@ -102,6 +102,7 @@ The project includes several test scripts in `package.json`:
 │   ├── features              # Feature tests
 │   │   └── sample.feature.ts # Sample feature test
 │   ├── auth.setup.ts         # Authentication setup, caches sessions
+│   ├── spec.helpers.ts       # Helpers for signUp, signOut, and signIn
 │   └── smoke.spec.ts         # Verifies signUp, signOut, and signIn
 ├── playwright.config.ts      # Playwright config
 ```
@@ -111,7 +112,7 @@ The project includes several test scripts in `package.json`:
 The project includes helper functions for authentication flows you can customize for your specific needs.
 
 ```typescript
-// Example from e2e/helpers/auth.ts
+// Snippets from e2e/spec.helpers.ts
 export const createTestContext = () => {
   const timestamp = Date.now();
   return {
