@@ -142,14 +142,13 @@ The Playwright configuration (`playwright.config.ts`) includes multiple projects
 
 Each project can have different browser configurations, dependencies, and test patterns.
 
-## Best Practices
+## Recommendations
 
 - Keep E2E tests focused on critical paths
 - Use the recorder for complex interactions
 - Cache sessions when possible to speed up tests
 - Use role-based selectors for better accessibility testing
-- Run smoke tests in CI for every change
-- Run feature tests less frequently
+- Run your set of feature tests for PRs in CI
 
 ## License
 
