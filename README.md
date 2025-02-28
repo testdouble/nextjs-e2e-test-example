@@ -48,6 +48,9 @@ This project shows how to:
    npx playwright install
    ```
 
+1. Follow the Auth0 Quickstart Guide to set up your Auth0 app and configuration.
+  - https://auth0.com/docs/quickstart/webapp/nextjs
+
 1. Configure your Auth0 credentials in `.env.local`:
    ```
    AUTH0_SECRET='your-auth0-secret'
